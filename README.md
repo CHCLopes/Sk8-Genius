@@ -22,11 +22,18 @@
 
 <br />
 
-## 🌐 Projeto Online
+---
 
-O jogo está em produção e pode ser jogado diretamente pelo navegador:
+## 🌐 Deploy & Link do Projeto
 
-**👉 Jogue agora:** [Inserir Link da Hospedagem Aqui - ex: Vercel, Netlify, GitHub Pages]
+A aplicação está publicada e disponível para acesso através do link oficial abaixo:
+
+**👉 Jogue agora: [Sk8-Genius](https://sk8-genius.netlify.app/)**
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/76c13845-355b-4d38-9f32-95ca88045af1/deploy-status)](https://app.netlify.com/projects/sk8-genius/deploys)
+
+> [!TIP] 
+> Para uma experiência completa, **certifique-se de que o áudio do seu dispositivo está ativado** para interagir com o sintetizador de frequências.
 
 ---
 
