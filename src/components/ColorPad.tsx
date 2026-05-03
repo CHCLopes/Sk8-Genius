@@ -51,7 +51,7 @@ export const ColorPad: React.FC<ColorPadProps> = React.memo(({
       onPointerDown={() => onClick(colorCode)}
       className={cn(
         'w-full h-full relative cursor-pointer outline-none border-[6px]',
-        'transition-all duration-150 ease-out',
+        'transition-all duration-150 ease-out touch-none select-none',
         // Glassmorphism default state
         'backdrop-blur-sm',
         isPowerOn ? styles.base : 'bg-slate-800 border-slate-700 opacity-50',

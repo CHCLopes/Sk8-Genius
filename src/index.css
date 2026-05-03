@@ -26,3 +26,26 @@ body {
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
+
+@theme {
+  --animate-float-up: floatUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+  @keyframes floatUp {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, 10px) scale(0.5);
+    }
+    20% {
+      opacity: 1;
+      transform: translate(-50%, -5px) scale(1.2);
+    }
+    80% {
+      opacity: 1;
+      transform: translate(-50%, -15px) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -25px) scale(0.8);
+    }
+  }
+}

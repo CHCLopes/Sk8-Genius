@@ -35,7 +35,7 @@ export const ControlPanel = React.memo<ControlPanelProps>(({
 }) => {
   return (
     <div className={cn(
-      "w-56 h-56 sm:w-64 sm:h-64 bg-slate-900 rounded-full border-8 border-slate-950 flex flex-col items-center justify-center z-20 shadow-2xl overflow-visible",
+      "w-56 h-56 sm:w-64 sm:h-64 bg-slate-900 rounded-full border-8 border-slate-950 flex flex-col items-center justify-center z-20 shadow-2xl overflow-visible pointer-events-none",
       "transition-all duration-[1500ms] ease-in-out relative",
       isPowerOn ? "scale-100" : "scale-[1.4] sm:scale-[1.6]"
     )}>
@@ -69,7 +69,7 @@ export const ControlPanel = React.memo<ControlPanelProps>(({
       </svg>
 
       {/* Container interno para afastar das bordas circulares */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4 pt-4 pb-2">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full px-4 pt-4 pb-2 pointer-events-auto">
         <div className="mb-2 sm:mb-3 text-center">
           <h1 className={cn(
             "text-xl sm:text-2xl font-black tracking-widest transition-colors duration-500",
@@ -78,6 +78,13 @@ export const ControlPanel = React.memo<ControlPanelProps>(({
             GENIUS
           </h1>
         </div>
+
+        {/* Floating +1 Feedback */}
+        {score > 0 && isPowerOn && !gameOver && !isVictory && (
+          <div key={`score-float-${score}`} className="absolute top-12 left-1/2 -translate-x-1/2 text-green-400 font-black text-xl drop-shadow-[0_0_8px_rgba(74,222,128,1)] animate-float-up pointer-events-none z-50">
+            +1
+          </div>
+        )}
 
         {/* Displays */}
         <div className="flex gap-3 sm:gap-4 mb-3 sm:mb-4">
@@ -172,18 +179,21 @@ export const ControlPanel = React.memo<ControlPanelProps>(({
               onClick={onTogglePower}
               className={cn(
                 "w-7 h-7 rounded-full flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer",
-                isPowerOn ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.6)]" : "bg-green-900 shadow-sm"
+                isPowerOn ? "bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.6)]" : "bg-red-600 hover:bg-red-500 shadow-[0_0_15px_rgba(220,38,38,0.7)] animate-pulse"
               )}
             >
-              <Power size={12} className={isPowerOn ? "text-white drop-shadow-[0_0_2px_rgba(255,255,255,1)]" : "text-green-700"} />
+              <Power size={12} className={isPowerOn ? "text-white drop-shadow-[0_0_2px_rgba(255,255,255,1)]" : "text-white drop-shadow-[0_0_2px_rgba(255,255,255,0.8)]"} />
             </button>
-            <span className="text-[7px] sm:text-[8px] text-slate-500 font-bold mt-1 uppercase text-center leading-none">Power<br/>[P]</span>
+            <span className={cn(
+              "text-[7px] sm:text-[8px] font-bold mt-1 uppercase text-center leading-none",
+              isPowerOn ? "text-slate-500" : "text-red-500 animate-pulse"
+            )}>Power<br/>[P]</span>
           </div>
         </div>
       </div>
 
       {(gameOver || isVictory) && (
-        <div className="absolute inset-0 rounded-full bg-slate-950/90 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in zoom-in duration-300 z-30 px-4 text-center">
+        <div className="absolute inset-0 rounded-full bg-slate-950/90 backdrop-blur-sm flex flex-col items-center justify-center animate-in fade-in zoom-in duration-300 z-30 px-4 text-center pointer-events-auto">
           {isVictory ? (
             <>
               <h2 className="text-xl sm:text-2xl font-black text-white drop-shadow-[0_0_10px_rgba(255,255,255,1)] animate-pulse">PARABÉNS!</h2>
