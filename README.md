@@ -82,6 +82,15 @@ O projeto saltou de nível em múltiplos pilares de Engenharia de Software e Des
 | ⌨️ **Acessibilidade (A11y)** | Interação focada puramente em cliques do mouse. | Suporte total a teclado (*Power Users*). Teclas grafadas na UI, navegação completa por atalhos e Modal de Ajuda com motor de busca. |
 | ⚡ **Performance & Seg.** | Sujeito a repinturas excessivas no DOM e ausência de headers de segurança. | *Memoization* (`React.memo`) garantindo bundle de **~79 KB**. Injeção de políticas **CSP** rígidas contra injeção de scripts/XSS. |
 
+## 🏛️ Histórico e Versão Legada
+
+Para fins de estudo arquitetural e comparação de performance, o código-fonte e o deploy da versão original de 2022 (desenvolvida inteiramente em Vanilla JS) permanecem abertos.
+
+- **Repositório Legado:** [https://github.com/CHCLopes/Sk8-Genius-Game](https://github.com/CHCLopes/Sk8-Genius-Game) 
+- **Jogar Versão Legada:** [https://sk8genius.netlify.app/](https://sk8genius.netlify.app/)
+
+A comparação prática entre as duas versões evidencia a eliminação de repinturas desnecessárias do DOM e a mitigação da latência de áudio alcançadas nesta versão em React.
+
 ---
 
 ## 🛠️ Guia de Manutenção (Para futuros Devs)
