@@ -81,6 +81,7 @@ O projeto saltou de nível em múltiplos pilares de Engenharia de Software e Des
 | 🔊 **Engenharia Sonora** | Arquivos `.mp3` convencionais, sujeitos a latência e delay de rede. | Sintetizador via **Web Audio API**. Frequências geradas em tempo real (latência zero) com política de áudio *Opt-in* (inicia mutado). |
 | ⌨️ **Acessibilidade (A11y)** | Interação focada puramente em cliques do mouse. | Suporte total a teclado (*Power Users*). Teclas grafadas na UI, navegação completa por atalhos e Modal de Ajuda com motor de busca. |
 | ⚡ **Performance & Seg.** | Sujeito a repinturas excessivas no DOM e ausência de headers de segurança. | *Memoization* (`React.memo`) garantindo bundle de **~79 KB**. Injeção de políticas **CSP** rígidas contra injeção de scripts/XSS. |
+| ⚙️ **Infraestrutura (CI/CD)** | Deploy manual, sem validação automatizada ou testes de esteira. | Esteira CI via GitHub Actions (testes no Vitest, auditoria estrita) acoplada ao CD via Netlify. |
 
 ## 🏛️ Histórico e Versão Legada
 
@@ -104,6 +105,17 @@ A longevidade do código baseia-se na clareza modular. Para escalar ou modificar
    * Todo o gerador de frequências mora no Singleton instanciado em `src/utils/audio.ts`. Se desejar alterar as notas musicais das lentes verde/vermelha/amarela/azul, modifique os hertz nativos deste arquivo.
 3. **Gerenciamento de Renderização:**
    * Os painéis físicos do brinquedo não possuem regras de negócio e estão embrulhados em `React.memo` (`ColorPad` e `ControlPanel`). Se precisar injetar uma nova propriedade lá dentro, certifique-se de que a função foi gerada no Pai usando `useCallback` para evitar matar a otimização de repintura do Virtual DOM.
+
+## ⚙️ Infraestrutura e CI/CD
+
+O projeto conta com uma esteira de Integração e Entrega Contínua para garantir a estabilidade absoluta do código em produção e bloquear regressões.
+
+- **CI (Integração Contínua):** Orquestrado via **GitHub Actions**. A cada novo *push* ou *pull request* na *branch* principal, um container Linux é provisionado automaticamente para:
+  1. Realizar a instalação limpa e determinística de dependências (`npm ci`).
+  2. Executar auditoria de segurança bloqueante (`npm audit --audit-level=high`).
+  3. Executar a suíte de testes unitários da lógica matemática do jogo utilizando **Vitest**.
+  4. Homologar a compilação do *build* final do Vite.
+- **CD (Entrega Contínua):** Integrado ao **Netlify**. A publicação do link de produção é condicionada à aprovação integral da esteira de CI no GitHub. Se um teste de lógica falhar, o deploy é abortado.
 
 ---
 
